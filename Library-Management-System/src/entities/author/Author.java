@@ -1,6 +1,6 @@
 package entities.author;
 
-import entities.book.Book;
+import entities.publication.Publication;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -17,17 +17,17 @@ public interface Author {
 
     String getNationality();
 
-    List<Book> getWrittenBooks();
+    List<Publication> getWrittenBooks();
 
     int getNumberOfWrittenBooks();
 
-    void addWrittenBook(Book book);
+    void addWrittenBook(Publication publication);
 
-    Book getOldestBook();
+    Publication getOldestBook();
 
-    Book getLatestBook();
+    Publication getLatestBook();
 
-    Book getLongestBook();
+    Publication getLongestBook();
 
-    Book getShortestBook();
+    Publication getShortestBook();
 }

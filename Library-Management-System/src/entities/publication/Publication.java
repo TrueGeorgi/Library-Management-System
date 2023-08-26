@@ -1,10 +1,10 @@
-package entities.book;
+package entities.publication;
 
 import entities.author.Author;
 
 import java.time.LocalDate;
 
-public interface Book {
+public interface Publication {
 
     String getTitle();
 
@@ -23,9 +23,5 @@ public interface Book {
     int getId();
 
     LocalDate getDateIssued();
-
-    void setId(); //TODO increase idBase everytime
-
-    boolean setIfAgeRestricted();
 
 }

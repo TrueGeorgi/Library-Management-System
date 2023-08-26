@@ -1,7 +1,7 @@
 package entities.author;
 
 import common.ExceptionMessages;
-import entities.book.Book;
+import entities.publication.Publication;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -16,7 +16,7 @@ public abstract class BaseAuthor implements Author {
     private String lastName;
     private LocalDate birthday;
     private String nationality;
-    private List<Book> writtenBooks;
+    private List<Publication> writtenPublications;
 
     // constructor
 
@@ -25,7 +25,7 @@ public abstract class BaseAuthor implements Author {
         setLastName(lastName);
         setBirthday(birthday);
         setNationality(nationality);
-        writtenBooks = new ArrayList<>();
+        writtenPublications = new ArrayList<>();
     }
 
     // getters
@@ -51,8 +51,8 @@ public abstract class BaseAuthor implements Author {
     }
 
     @Override
-    public List<Book> getWrittenBooks() {
-        return Collections.unmodifiableList(writtenBooks);
+    public List<Publication> getWrittenBooks() {
+        return Collections.unmodifiableList(writtenPublications);
     }
 
     // setters
@@ -84,25 +84,25 @@ public abstract class BaseAuthor implements Author {
 
     @Override
     public int getNumberOfWrittenBooks() {
-        return writtenBooks.size();
+        return writtenPublications.size();
     }
 
     @Override
-    public void addWrittenBook(Book book) {
-        writtenBooks.add(book);
+    public void addWrittenBook(Publication publication) {
+        writtenPublications.add(publication);
     }
 
     @Override
-    public Book getOldestBook() {
+    public Publication getOldestBook() {
         throwExceptionIfWrittenBooksIsEmpty();
-        Book toBeReturned = null;
+        Publication toBeReturned = null;
         LocalDate oldestDate = LocalDate.now();
 
-        for (Book book : writtenBooks) {
-            int compareDates = book.getDateIssued().compareTo(oldestDate);
+        for (Publication publication : writtenPublications) {
+            int compareDates = publication.getDateIssued().compareTo(oldestDate);
             if (compareDates < 0) {
-                toBeReturned = book;
-                oldestDate = book.getDateIssued();
+                toBeReturned = publication;
+                oldestDate = publication.getDateIssued();
             }
         }
 
@@ -110,16 +110,16 @@ public abstract class BaseAuthor implements Author {
     }
 
     @Override
-    public Book getLatestBook() {
+    public Publication getLatestBook() {
         throwExceptionIfWrittenBooksIsEmpty();
-        Book toBeReturned = null;
+        Publication toBeReturned = null;
         LocalDate latestDate = LocalDate.parse("0-0-0");
 
-        for (Book book : writtenBooks) {
-            int compareDates = book.getDateIssued().compareTo(latestDate);
+        for (Publication publication : writtenPublications) {
+            int compareDates = publication.getDateIssued().compareTo(latestDate);
             if (compareDates > 0) {
-                toBeReturned = book;
-                latestDate = book.getDateIssued();
+                toBeReturned = publication;
+                latestDate = publication.getDateIssued();
             }
         }
 
@@ -127,31 +127,31 @@ public abstract class BaseAuthor implements Author {
     }
 
     @Override
-    public Book getLongestBook() {
+    public Publication getLongestBook() {
         throwExceptionIfWrittenBooksIsEmpty();
-        Book longestBook = null;
+        Publication longestPublication = null;
         int mostPages = 0;
-        for (Book book : writtenBooks) {
-            if (book.getPages() > mostPages) {
-                longestBook = book;
-                mostPages = book.getPages();
+        for (Publication publication : writtenPublications) {
+            if (publication.getPages() > mostPages) {
+                longestPublication = publication;
+                mostPages = publication.getPages();
             }
         }
-        return longestBook;
+        return longestPublication;
     }
 
     @Override
-    public Book getShortestBook() {
+    public Publication getShortestBook() {
         throwExceptionIfWrittenBooksIsEmpty();
-        Book shortestBook = null;
+        Publication shortestPublication = null;
         int leastPages = Integer.MAX_VALUE;
-        for (Book book : writtenBooks) {
-            if (book.getPages() < leastPages) {
-                shortestBook = book;
-                leastPages = book.getPages();
+        for (Publication publication : writtenPublications) {
+            if (publication.getPages() < leastPages) {
+                shortestPublication = publication;
+                leastPages = publication.getPages();
             }
         }
-        return shortestBook;
+        return shortestPublication;
     }
 
     // private methods
